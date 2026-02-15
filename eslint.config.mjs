@@ -55,6 +55,7 @@ export default [
       semi: ['error', 'never'], // 语句末尾不加分号
       'no-var': 'error', // 要求使用 let 或 const 而不是 var
       '@typescript-eslint/no-explicit-any': 'off', // 禁用 any 检查
+      '@typescript-eslint/no-unused-vars': 'off', // 禁用未使用变量检查（如 ElMessage 等自动导入的全局变量）
       'vue/multi-word-component-names': 'off', // 禁用对 Vue 组件名称的多词要求检查
       'no-multiple-empty-lines': ['warn', { max: 1 }], // 不允许多个空行
       'no-unexpected-multiline': 'error' // 禁止空余的多行

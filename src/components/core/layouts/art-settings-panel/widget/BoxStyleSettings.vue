@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SectionTitle :title="$t('setting.box.title')" class="mt-10" />
+    <SectionTitle title="盒子样式" class="mt-10" />
     <div class="box-border flex-cb p-1 mt-5 rounded-lg bg-g-200">
       <div
         v-for="option in boxStyleOptions"

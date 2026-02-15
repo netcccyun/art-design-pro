@@ -5,7 +5,7 @@ export const exceptionRoutes: AppRouteRecord = {
   name: 'Exception',
   component: '/index/index',
   meta: {
-    title: 'menus.exception.title',
+    title: '异常页面',
     icon: 'ri:error-warning-line'
   },
   children: [
@@ -14,7 +14,7 @@ export const exceptionRoutes: AppRouteRecord = {
       name: 'Exception403',
       component: '/exception/403',
       meta: {
-        title: 'menus.exception.forbidden',
+        title: '403',
         keepAlive: true,
         isHideTab: true,
         isFullPage: true
@@ -25,7 +25,7 @@ export const exceptionRoutes: AppRouteRecord = {
       name: 'Exception404',
       component: '/exception/404',
       meta: {
-        title: 'menus.exception.notFound',
+        title: '404',
         keepAlive: true,
         isHideTab: true,
         isFullPage: true
@@ -36,7 +36,7 @@ export const exceptionRoutes: AppRouteRecord = {
       name: 'Exception500',
       component: '/exception/500',
       meta: {
-        title: 'menus.exception.serverError',
+        title: '500',
         keepAlive: true,
         isHideTab: true,
         isFullPage: true

@@ -31,6 +31,14 @@
   height: var(--el-component-custom-height) !important;
   line-height: var(--el-component-custom-height) !important;
 }
+.el-form-item__label:not(.el-form-item--label-top .el-form-item__label) {
+  line-height: 1.5 !important;
+  display: flex;
+  align-items: center;
+}
+.el-form-item--label-top .el-form-item__label {
+  margin-bottom: 0;
+}
 
 // 日期选择器
 .el-date-range-picker {
@@ -130,7 +138,7 @@ html.dark .el-card {
 }
 
 .el-dialog__body {
-  padding: 25px 0 !important;
+  padding: 5px 0 !important;
   position: relative; // 为了兼容 el-pagination 样式，需要设置 relative，不然会影响 el-pagination 的样式，比如 el-pagination__jump--small 会被影响，导致 el-pagination__jump--small 按钮无法点击，详见 URL_ADDRESS.com/element-plus/element-plus/issues/5684#issuecomment-1176299275;
 }
 
@@ -338,6 +346,16 @@ html.dark .el-card {
 
 .el-message-box {
   padding: 25px 20px !important;
+
+  // 提示信息内的链接文字改为蓝色
+  .el-message-box__message a {
+    color: #409eff !important;
+
+    &:hover {
+      color: #66b1ff !important;
+      text-decoration: underline !important;
+    }
+  }
 }
 
 .el-message-box__title {

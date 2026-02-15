@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SectionTitle :title="$t('setting.container.title')" class="mt-12.5" />
+    <SectionTitle title="容器宽度" class="mt-12.5" />
     <div class="flex">
       <div
         v-for="option in containerWidthOptions"

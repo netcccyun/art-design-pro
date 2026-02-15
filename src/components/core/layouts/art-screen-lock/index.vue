@@ -34,7 +34,7 @@
               <ElInput
                 v-model="formData.password"
                 type="password"
-                :placeholder="$t('lockScreen.lock.inputPlaceholder')"
+                placeholder="请输入锁屏密码"
                 :show-password="true"
                 autocomplete="new-password"
                 ref="lockInputRef"
@@ -49,7 +49,7 @@
               </ElInput>
             </ElFormItem>
             <ElButton type="primary" class="w-full mt-0.5" @click="handleLock" v-ripple>
-              {{ $t('lockScreen.lock.btnText') }}
+              锁定
             </ElButton>
           </ElForm>
         </div>
@@ -74,7 +74,7 @@
             <ElInput
               v-model="unlockForm.password"
               type="password"
-              :placeholder="$t('lockScreen.unlock.inputPlaceholder')"
+              placeholder="请输入解锁密码"
               :show-password="true"
               autocomplete="new-password"
               ref="unlockInputRef"
@@ -89,7 +89,7 @@
           </ElFormItem>
 
           <ElButton type="primary" class="w-full mt-2" @click="handleUnlock" v-ripple>
-            {{ $t('lockScreen.unlock.btnText') }}
+            解锁
           </ElButton>
           <div class="w-full text-center">
             <ElButton
@@ -97,7 +97,7 @@
               class="mt-2.5 !text-g-600 hover:!text-theme hover:!bg-transparent"
               @click="toLogin"
             >
-              {{ $t('lockScreen.unlock.backBtnText') }}
+              返回登录
             </ElButton>
           </div>
         </ElForm>
@@ -109,13 +109,9 @@
 <script setup lang="ts">
   import { Lock, Unlock } from '@element-plus/icons-vue'
   import type { FormInstance, FormRules } from 'element-plus'
-  import { useI18n } from 'vue-i18n'
   import CryptoJS from 'crypto-js'
   import { useUserStore } from '@/store/modules/user'
   import { mittBus } from '@/utils/sys'
-
-  // 国际化
-  const { t } = useI18n()
 
   // 环境变量
   const ENCRYPT_KEY = import.meta.env.VITE_LOCK_ENCRYPT_KEY
@@ -147,7 +143,7 @@
     password: [
       {
         required: true,
-        message: t('lockScreen.lock.inputPlaceholder'),
+        message: '请输入锁屏密码',
         trigger: 'blur'
       }
     ]
@@ -390,7 +386,7 @@
               inputElement.classList.remove('shake-animation')
             }, 300)
           }
-          ElMessage.error(t('lockScreen.pwdError'))
+          ElMessage.error('密码错误')
           unlockForm.password = ''
         }
       } else {

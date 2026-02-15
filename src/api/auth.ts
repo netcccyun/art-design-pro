@@ -27,3 +27,14 @@ export function fetchGetUserInfo() {
     // }
   })
 }
+
+/**
+ * 退出登录
+ * @returns 退出响应
+ */
+export function fetchLogout() {
+  return request.post<{ code: number; msg: string }>({
+    url: '/api/auth/logout',
+    showErrorMessage: true
+  })
+}

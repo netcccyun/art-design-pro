@@ -8,8 +8,8 @@
 
       <div class="auth-right-wrap">
         <div class="form">
-          <h3 class="title">{{ $t('login.title') }}</h3>
-          <p class="sub-title">{{ $t('login.subTitle') }}</p>
+          <h3 class="title">欢迎回来</h3>
+          <p class="sub-title">输入您的账号和密码登录</p>
           <ElForm
             ref="formRef"
             :model="formData"
@@ -33,14 +33,14 @@
             <ElFormItem prop="username">
               <ElInput
                 class="custom-height"
-                :placeholder="$t('login.placeholder.username')"
+                placeholder="请输入账号"
                 v-model.trim="formData.username"
               />
             </ElFormItem>
             <ElFormItem prop="password">
               <ElInput
                 class="custom-height"
-                :placeholder="$t('login.placeholder.password')"
+                placeholder="请输入密码"
                 v-model.trim="formData.password"
                 type="password"
                 autocomplete="off"
@@ -57,9 +57,9 @@
                 <ArtDragVerify
                   ref="dragVerify"
                   v-model:value="isPassing"
-                  :text="$t('login.sliderText')"
+                  text="按住滑块拖动"
                   textColor="var(--art-gray-700)"
-                  :successText="$t('login.sliderSuccessText')"
+                  successText="验证成功"
                   progressBarBg="var(--main-color)"
                   :background="isDark ? '#26272F' : '#F1F1F4'"
                   handlerBg="var(--default-box-color)"
@@ -69,17 +69,15 @@
                 class="absolute top-0 z-[1] px-px mt-2 text-xs text-[#f56c6c] tad-300"
                 :class="{ 'translate-y-10': !isPassing && isClickPass }"
               >
-                {{ $t('login.placeholder.slider') }}
+                请拖动滑块完成验证
               </p>
             </div>
 
             <div class="flex-cb mt-2 text-sm">
-              <ElCheckbox v-model="formData.rememberPassword">{{
-                $t('login.rememberPwd')
-              }}</ElCheckbox>
-              <RouterLink class="text-theme" :to="{ name: 'ForgetPassword' }">{{
-                $t('login.forgetPwd')
-              }}</RouterLink>
+              <ElCheckbox v-model="formData.rememberPassword"> 记住密码 </ElCheckbox>
+              <RouterLink class="text-theme" :to="{ name: 'ForgetPassword' }">
+                忘记密码
+              </RouterLink>
             </div>
 
             <div style="margin-top: 30px">
@@ -90,15 +88,13 @@
                 :loading="loading"
                 v-ripple
               >
-                {{ $t('login.btnText') }}
+                登录
               </ElButton>
             </div>
 
             <div class="mt-5 text-sm text-gray-600">
-              <span>{{ $t('login.noAccount') }}</span>
-              <RouterLink class="text-theme" :to="{ name: 'Register' }">{{
-                $t('login.register')
-              }}</RouterLink>
+              <span>还没有账号？</span>
+              <RouterLink class="text-theme" :to="{ name: 'Register' }"> 注册 </RouterLink>
             </div>
           </ElForm>
         </div>
@@ -110,23 +106,15 @@
 <script setup lang="ts">
   import AppConfig from '@/config'
   import { useUserStore } from '@/store/modules/user'
-  import { useI18n } from 'vue-i18n'
-  import { HttpError } from '@/utils/http/error'
   import { fetchLogin } from '@/api/auth'
-  import { ElNotification, type FormInstance, type FormRules } from 'element-plus'
+  import { ElMessageBox, ElNotification, type FormInstance, type FormRules } from 'element-plus'
   import { useSettingStore } from '@/store/modules/setting'
 
   defineOptions({ name: 'Login' })
 
   const settingStore = useSettingStore()
   const { isDark } = storeToRefs(settingStore)
-  const { t, locale } = useI18n()
   const formKey = ref(0)
-
-  // 监听语言切换，重置表单
-  watch(locale, () => {
-    formKey.value++
-  })
 
   type AccountKey = 'super' | 'admin' | 'user'
 
@@ -141,21 +129,21 @@
   const accounts = computed<Account[]>(() => [
     {
       key: 'super',
-      label: t('login.roles.super'),
+      label: '超级管理员',
       userName: 'Super',
       password: '123456',
       roles: ['R_SUPER']
     },
     {
       key: 'admin',
-      label: t('login.roles.admin'),
+      label: '管理员',
       userName: 'Admin',
       password: '123456',
       roles: ['R_ADMIN']
     },
     {
       key: 'user',
-      label: t('login.roles.user'),
+      label: '普通用户',
       userName: 'User',
       password: '123456',
       roles: ['R_USER']
@@ -181,8 +169,8 @@
   })
 
   const rules = computed<FormRules>(() => ({
-    username: [{ required: true, message: t('login.placeholder.username'), trigger: 'blur' }],
-    password: [{ required: true, message: t('login.placeholder.password'), trigger: 'blur' }]
+    username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+    password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
   }))
 
   const loading = ref(false)
@@ -239,15 +227,8 @@
       // 获取 redirect 参数，如果存在则跳转到指定页面，否则跳转到首页
       const redirect = route.query.redirect as string
       router.push(redirect || '/')
-    } catch (error) {
-      // 处理 HttpError
-      if (error instanceof HttpError) {
-        // console.log(error.code)
-      } else {
-        // 处理非 HttpError
-        // ElMessage.error('登录失败，请稍后重试')
-        console.error('[Login] Unexpected error:', error)
-      }
+    } catch (error: any) {
+      ElMessageBox.alert(error.message || '未知错误', '提示信息', { type: 'error' }).catch(() => {})
     } finally {
       loading.value = false
       resetDragVerify()
@@ -263,11 +244,11 @@
   const showLoginSuccessNotice = () => {
     setTimeout(() => {
       ElNotification({
-        title: t('login.success.title'),
+        title: '登录成功',
         type: 'success',
         duration: 2500,
         zIndex: 10000,
-        message: `${t('login.success.message')}, ${systemName}!`
+        message: `欢迎回来, ${systemName}!`
       })
     }, 1000)
   }

@@ -51,12 +51,18 @@ export default ({ mode }: { mode: string }) => {
       outDir: 'dist',
       chunkSizeWarningLimit: 2000,
       minify: 'terser',
+      sourcemap: false,
       terserOptions: {
         compress: {
           // 生产环境去除 console
           drop_console: true,
           // 生产环境去除 debugger
-          drop_debugger: true
+          drop_debugger: true,
+          passes: 2
+        },
+        mangle: true,
+        format: {
+          comments: false // 移除注释
         }
       },
       dynamicImportVarsOptions: {
@@ -86,12 +92,12 @@ export default ({ mode }: { mode: string }) => {
       }),
       // 按需定制主题配置
       ElementPlus({
-        useSource: true
+        useSource: false
       }),
       // 压缩
       viteCompression({
         verbose: false, // 是否在控制台输出压缩结果
-        disable: false, // 是否禁用
+        disable: true, // 是否禁用
         algorithm: 'gzip', // 压缩算法
         ext: '.gz', // 压缩后的文件名后缀
         threshold: 10240, // 只有大小大于该值的资源会被处理 10240B = 10KB

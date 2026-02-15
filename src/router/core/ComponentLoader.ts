@@ -14,7 +14,7 @@ export class ComponentLoader {
 
   constructor() {
     // 动态导入 views 目录下所有 .vue 组件
-    this.modules = import.meta.glob('../../views/**/*.vue')
+    this.modules = import.meta.glob('../../views/**/index.vue')
   }
 
   /**

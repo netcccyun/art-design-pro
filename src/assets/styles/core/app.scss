@@ -290,3 +290,11 @@
     -webkit-tap-highlight-color: transparent;
   }
 }
+
+// 非全屏模式下，阻止 el-table 内部 scrollbar 拦截垂直滚轮事件
+// 全屏模式下 .art-page-view 会加上 .el-full-screen 类，此时需要恢复表格内部垂直滚动
+.art-page-view:not(.el-full-screen) {
+  .el-table .el-scrollbar__wrap {
+    overflow-y: hidden !important;
+  }
+}

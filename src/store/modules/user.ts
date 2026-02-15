@@ -33,25 +33,21 @@
  */
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { LanguageEnum } from '@/enums/appEnum'
 import { router } from '@/router'
 import { useSettingStore } from './setting'
 import { useWorktabStore } from './worktab'
 import { AppRouteRecord } from '@/types/router'
-import { setPageTitle } from '@/utils/router'
 import { resetRouterState } from '@/router/guards/beforeEach'
 import { useMenuStore } from './menu'
 import { StorageConfig } from '@/utils/storage/storage-config'
 
 /**
  * 用户状态管理
- * 管理用户登录状态、个人信息、语言设置、搜索历史、锁屏状态等
+ * 管理用户登录状态、个人信息、搜索历史、锁屏状态等
  */
 export const useUserStore = defineStore(
   'userStore',
   () => {
-    // 语言设置
-    const language = ref(LanguageEnum.ZH)
     // 登录状态
     const isLogin = ref(false)
     // 锁屏状态
@@ -88,15 +84,6 @@ export const useUserStore = defineStore(
      */
     const setLoginStatus = (status: boolean) => {
       isLogin.value = status
-    }
-
-    /**
-     * 设置语言
-     * @param lang 语言枚举值
-     */
-    const setLanguage = (lang: LanguageEnum) => {
-      setPageTitle(router.currentRoute.value)
-      language.value = lang
     }
 
     /**
@@ -139,8 +126,19 @@ export const useUserStore = defineStore(
      * 退出登录
      * 清空所有用户相关状态并跳转到登录页
      * 如果是同一账号重新登录，保留工作台标签页
+     * @param skipApi 为 true 时跳过调用后端退出接口（用于未登录状态直接跳转）
      */
-    const logOut = () => {
+    const logOut = async (options?: { skipApi?: boolean }) => {
+      // 调用后端退出登录接口（已登录用户主动退出时）
+      if (!options?.skipApi) {
+        try {
+          const { fetchLogout } = await import('@/api/auth')
+          await fetchLogout()
+        } catch (error) {
+          console.error('退出登录接口调用失败:', error)
+        }
+      }
+
       // 保存当前用户 ID，用于下次登录时判断是否为同一用户
       const currentUserId = info.value.userId
       if (currentUserId) {
@@ -204,7 +202,6 @@ export const useUserStore = defineStore(
     }
 
     return {
-      language,
       isLogin,
       isLock,
       lockPassword,
@@ -217,7 +214,6 @@ export const useUserStore = defineStore(
       getWorktabState,
       setUserInfo,
       setLoginStatus,
-      setLanguage,
       setSearchHistory,
       setLockStatus,
       setLockPassword,

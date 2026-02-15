@@ -69,8 +69,6 @@ export interface SettingState {
   autoClose: boolean
   /** 是否显示工作标签页 */
   showWorkTab: boolean
-  /** 是否显示语言切换 */
-  showLanguage: boolean
   /** 是否显示进度条 */
   showNprogress: boolean
   /** 主题模式 */

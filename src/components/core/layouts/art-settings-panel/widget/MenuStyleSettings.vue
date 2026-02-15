@@ -1,5 +1,5 @@
 <template>
-  <SectionTitle :title="$t('setting.menu.title')" />
+  <SectionTitle title="菜单风格" />
   <div class="setting-box-wrap">
     <div
       class="setting-item"
@@ -25,6 +25,7 @@
   import SectionTitle from './SectionTitle.vue'
   import { MenuTypeEnum, type MenuThemeEnum } from '@/enums/appEnum'
   import { useSettingStore } from '@/store/modules/setting'
+  import { storeToRefs } from 'pinia'
 
   const menuThemeList = AppConfig.themeList
   const settingStore = useSettingStore()

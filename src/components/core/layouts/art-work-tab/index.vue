@@ -86,7 +86,6 @@
 <script setup lang="ts">
   import { computed, onMounted, ref, watch, nextTick, onUnmounted } from 'vue'
   import { LocationQueryRaw, useRoute, useRouter } from 'vue-router'
-  import { useI18n } from 'vue-i18n'
   import { storeToRefs } from 'pinia'
 
   import { useWorktabStore } from '@/store/modules/worktab'
@@ -113,7 +112,6 @@
   type TabCloseType = 'current' | 'left' | 'right' | 'other' | 'all'
 
   // 基础设置
-  const { t } = useI18n()
   const store = useWorktabStore()
   const userStore = useUserStore()
   const route = useRoute()
@@ -182,38 +180,38 @@
       return [
         {
           key: 'refresh',
-          label: t('worktab.btn.refresh'),
+          label: '刷新',
           icon: 'ri:refresh-line',
           disabled: !isCurrentTab
         },
         {
           key: 'fixed',
-          label: currentTab?.fixedTab ? t('worktab.btn.unfixed') : t('worktab.btn.fixed'),
+          label: currentTab?.fixedTab ? '取消固定' : '固定',
           icon: 'ri:pushpin-2-line',
           disabled: false,
           showLine: true
         },
         {
           key: 'left',
-          label: t('worktab.btn.closeLeft'),
+          label: '关闭左侧',
           icon: 'ri:arrow-left-s-line',
           disabled: clickedIndex === 0 || fixedStatus.areAllLeftTabsFixed
         },
         {
           key: 'right',
-          label: t('worktab.btn.closeRight'),
+          label: '关闭右侧',
           icon: 'ri:arrow-right-s-line',
           disabled: isLastTab || fixedStatus.areAllRightTabsFixed
         },
         {
           key: 'other',
-          label: t('worktab.btn.closeOther'),
+          label: '关闭其他',
           icon: 'ri:close-fill',
           disabled: isOneTab || fixedStatus.areAllOtherTabsFixed
         },
         {
           key: 'all',
-          label: t('worktab.btn.closeAll'),
+          label: '关闭全部',
           icon: 'ri:close-circle-line',
           disabled: isOneTab || fixedStatus.areAllTabsFixed
         }
@@ -465,16 +463,6 @@
     () => {
       setTransition()
       autoPositionTab()
-    }
-  )
-
-  watch(
-    () => userStore.language,
-    () => {
-      scrollState.value.translateX = 0
-      nextTick(() => {
-        autoPositionTab()
-      })
     }
   )
 </script>

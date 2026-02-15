@@ -11,7 +11,7 @@
     >
       <ElInput
         v-model.trim="searchVal"
-        :placeholder="$t('search.placeholder')"
+        placeholder="搜索页面"
         @input="search"
         @blur="searchBlur"
         ref="searchInput"
@@ -46,7 +46,7 @@
         </div>
 
         <div v-show="!searchVal && searchResult.length === 0 && historyResult.length > 0">
-          <p class="text-xs text-g-500">{{ $t('search.historyTitle') }}</p>
+          <p class="text-xs text-g-500">搜索历史</p>
           <div class="mt-1.5 w-full">
             <div
               class="box mt-2 h-12 c-p flex-cb rounded-custom-sm bg-g-200/80 px-4 text-sm text-g-800"
@@ -76,16 +76,16 @@
         <div class="dialog-footer box-border flex-c border-t-d pt-4.5 pb-1">
           <div class="flex-cc">
             <ArtSvgIcon icon="fluent:arrow-enter-left-20-filled" class="keyboard" />
-            <span class="mr-3.5 text-xs text-g-700">{{ $t('search.selectKeydown') }}</span>
+            <span class="mr-3.5 text-xs text-g-700">选择</span>
           </div>
           <div class="flex-c">
             <ArtSvgIcon icon="ri:arrow-up-wide-fill" class="keyboard" />
             <ArtSvgIcon icon="ri:arrow-down-wide-fill" class="keyboard" />
-            <span class="mr-3.5 text-xs text-g-700">{{ $t('search.switchKeydown') }}</span>
+            <span class="mr-3.5 text-xs text-g-700">切换</span>
           </div>
           <div class="flex-c">
             <i class="keyboard !w-8 flex-cc"><p class="text-[10px] font-medium">ESC</p></i>
-            <span class="mr-3.5 text-xs text-g-700">{{ $t('search.exitKeydown') }}</span>
+            <span class="mr-3.5 text-xs text-g-700">关闭</span>
           </div>
         </div>
       </template>

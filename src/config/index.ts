@@ -32,7 +32,7 @@
 import { MenuThemeEnum, MenuTypeEnum, SystemThemeEnum } from '@/enums/appEnum'
 import { SystemConfig } from '@/types/config'
 import { configImages } from './assets/images'
-import fastEnterConfig from './modules/fastEnter'
+// import fastEnterConfig from './modules/fastEnter'
 import { headerBarConfig } from './modules/headerBar'
 
 const appConfig: SystemConfig = {
@@ -127,7 +127,7 @@ const appConfig: SystemConfig = {
     '#FF80C8'
   ] as const,
   // 快速入口配置
-  fastEnter: fastEnterConfig,
+  // fastEnter: fastEnterConfig,
   // 顶部栏功能配置
   headerBar: headerBarConfig
 }

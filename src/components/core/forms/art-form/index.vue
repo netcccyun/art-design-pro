@@ -75,7 +75,7 @@
           >
             <div class="flex gap-2 md:justify-center">
               <ElButton v-if="showReset" class="reset-button" @click="handleReset" v-ripple>
-                {{ t('table.form.reset') }}
+                重置
               </ElButton>
               <ElButton
                 v-if="showSubmit"
@@ -85,7 +85,7 @@
                 v-ripple
                 :disabled="disabledSubmit"
               >
-                {{ t('table.form.submit') }}
+                提交
               </ElButton>
             </div>
           </div>
@@ -97,7 +97,6 @@
 
 <script setup lang="ts">
   import { useWindowSize } from '@vueuse/core'
-  import { useI18n } from 'vue-i18n'
   import type { Component } from 'vue'
   import {
     ElCascader,
@@ -143,7 +142,6 @@
   }
 
   const { width } = useWindowSize()
-  const { t } = useI18n()
   const isMobile = computed(() => width.value < 500)
 
   const formInstance = useTemplateRef<FormInstance>('formRef')

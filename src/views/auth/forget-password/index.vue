@@ -7,13 +7,13 @@
 
       <div class="auth-right-wrap">
         <div class="form">
-          <h3 class="title">{{ $t('forgetPassword.title') }}</h3>
-          <p class="sub-title">{{ $t('forgetPassword.subTitle') }}</p>
+          <h3 class="title">忘记密码？</h3>
+          <p class="sub-title">输入您的电子邮件来重置您的密码</p>
           <div class="mt-5">
             <span class="input-label" v-if="showInputLabel">账号</span>
             <ElInput
               class="custom-height"
-              :placeholder="$t('forgetPassword.placeholder')"
+              placeholder="请输入您的电子邮件"
               v-model.trim="username"
             />
           </div>
@@ -26,14 +26,12 @@
               :loading="loading"
               v-ripple
             >
-              {{ $t('forgetPassword.submitBtnText') }}
+              提交
             </ElButton>
           </div>
 
           <div style="margin-top: 15px">
-            <ElButton class="w-full custom-height" plain @click="toLogin">
-              {{ $t('forgetPassword.backBtnText') }}
-            </ElButton>
+            <ElButton class="w-full custom-height" plain @click="toLogin"> 返回 </ElButton>
           </div>
         </div>
       </div>

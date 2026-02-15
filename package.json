@@ -16,8 +16,7 @@
     "lint:stylelint": "stylelint  \"**/*.{css,scss,vue}\" --fix",
     "lint:lint-staged": "lint-staged",
     "prepare": "husky",
-    "commit": "git-cz",
-    "clean:dev": "tsx scripts/clean-dev.ts"
+    "commit": "git-cz"
   },
   "config": {
     "commitizen": {
@@ -70,6 +69,7 @@
     "ohash": "^2.0.11",
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.3.0",
+    "qrcode": "^1.5.4",
     "qrcode.vue": "^3.6.0",
     "tailwindcss": "^4.1.14",
     "vue": "^3.5.21",
@@ -84,6 +84,7 @@
     "@commitlint/config-conventional": "^19.4.1",
     "@eslint/js": "^9.9.1",
     "@types/node": "^24.0.5",
+    "@types/qrcode": "^1.5.6",
     "@typescript-eslint/eslint-plugin": "^8.3.0",
     "@typescript-eslint/parser": "^8.3.0",
     "@vitejs/plugin-vue": "^6.0.1",

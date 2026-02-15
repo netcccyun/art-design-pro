@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SectionTitle :title="$t('setting.basics.title')" class="mt-10" />
+    <SectionTitle title="基础配置" class="mt-10" />
     <SettingItem
       v-for="config in basicSettingsConfig"
       :key="config.key"
@@ -31,7 +31,6 @@
     showRefreshButton,
     showCrumbs,
     showWorkTab,
-    showLanguage,
     showNprogress,
     colorWeak,
     watermarkVisible,
@@ -49,7 +48,6 @@
     showRefreshButton,
     showCrumbs,
     showWorkTab,
-    showLanguage,
     showNprogress,
     colorWeak,
     watermarkVisible,

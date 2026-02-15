@@ -1,5 +1,5 @@
 <template>
-  <SectionTitle :title="$t('setting.theme.title')" />
+  <SectionTitle title="主题风格" />
   <div class="setting-box-wrap">
     <div
       class="setting-item"
@@ -10,7 +10,7 @@
       <div class="box" :class="{ 'is-active': item.theme === systemThemeMode }">
         <img :src="item.img" />
       </div>
-      <p class="name">{{ $t(`setting.theme.list[${index}]`) }}</p>
+      <p class="name">{{ ['浅色', '深色', '系统'][index] }}</p>
     </div>
   </div>
 </template>

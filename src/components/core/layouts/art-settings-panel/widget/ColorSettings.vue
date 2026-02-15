@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SectionTitle :title="$t('setting.color.title')" class="mt-10" />
+    <SectionTitle title="系统主题色" class="mt-10" />
     <div class="-mr-4">
       <div class="flex flex-wrap">
         <div

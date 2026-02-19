@@ -260,6 +260,10 @@
     delete columnProps.headerSlotName
     delete columnProps.useSlot
     delete columnProps.slotName
+    // 移动端布局时，移除列的 fixed 属性，避免固定列在窄屏下产生布局问题
+    if (layout.value === LAYOUT.MOBILE) {
+      columnProps.fixed = undefined
+    }
     return columnProps
   }
 

@@ -226,6 +226,10 @@ function handleLoginStatus(
 function isStaticRoute(path: string): boolean {
   const checkRoute = (routes: any[], targetPath: string): boolean => {
     return routes.some((route) => {
+      // 排除 404 通配路由，避免未登录访问 /dashboard 等路径时被误判为静态路由导致跳 404
+      if (route.name === 'Exception404') {
+        return false
+      }
       // 处理动态路由参数匹配
       const routePath = route.path
       const pattern = routePath.replace(/:[^/]+/g, '[^/]+').replace(/\*/g, '.*')

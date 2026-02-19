@@ -137,7 +137,7 @@
     </div>
 
     <!-- 标签页 -->
-    <ArtWorkTab />
+    <ArtWorkTab v-if="shouldShowWorkTab" />
 
     <!-- 通知 -->
     <ArtNotification v-model:value="showNotice" ref="notice" />
@@ -185,8 +185,11 @@
     fastEnterMinWidth: headerBarFastEnterMinWidth
   } = useHeaderBar()
 
-  const { menuOpen, systemThemeColor, showSettingGuide, menuType, isDark, tabStyle } =
+  const { menuOpen, systemThemeColor, showSettingGuide, menuType, isDark, tabStyle, showWorkTab } =
     storeToRefs(settingStore)
+
+  // 手机端(≤768px)不显示标签栏
+  const shouldShowWorkTab = computed(() => showWorkTab.value && width.value > 768)
 
   const { menuList } = storeToRefs(menuStore)
 
